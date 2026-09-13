@@ -28,7 +28,7 @@ export default function MemoryPhoto({
       }}
       viewport={{
         once: true,
-        amount: 0.2,
+        amount: 0.15,
       }}
       whileHover={{
         y: -5,
@@ -43,17 +43,36 @@ export default function MemoryPhoto({
           1,
         ],
       }}
-      className={`film-frame group block overflow-hidden bg-surface ${className}`}
+      className={`
+        film-frame
+        group
+        block
+        overflow-hidden
+        bg-surface
+        ${className}
+      `}
     >
       <div
-        className={`${FRAME_RATIO} w-full overflow-hidden`}
+        className={`
+          ${FRAME_RATIO}
+          w-full
+          overflow-hidden
+        `}
       >
         <img
           src={photo.src}
           alt=""
-          loading="eager"
+          loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          className="
+            h-full
+            w-full
+            object-cover
+            transition-transform
+            duration-700
+            ease-out
+            group-hover:scale-105
+          "
         />
       </div>
     </motion.button>
