@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import logo from '../assets/logo/logo.png';
 
 const lines = [
   { text: 'Same people.', delay: 0 },
@@ -8,7 +9,10 @@ const lines = [
 
 export default function Goodbye() {
   return (
-    <section id="goodbye" className="section flex flex-col items-center justify-center gap-16 bg-bg px-6 py-32 text-center">
+    <section
+      id="goodbye"
+      className="section flex flex-col items-center justify-center gap-16 bg-bg px-6 py-32 text-center"
+    >
       <div className="flex flex-col gap-3">
         {lines.map((line) => (
           <motion.p
@@ -16,7 +20,11 @@ export default function Goodbye() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 1, delay: line.delay, ease: 'easeOut' }}
+            transition={{
+              duration: 1,
+              delay: line.delay,
+              ease: 'easeOut',
+            }}
             className="font-display text-2xl text-muted md:text-3xl"
           >
             {line.text}
@@ -28,7 +36,11 @@ export default function Goodbye() {
         initial={{ opacity: 0, scale: 0.96 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 1.4, delay: 2.8, ease: 'easeOut' }}
+        transition={{
+          duration: 1.4,
+          delay: 2.8,
+          ease: 'easeOut',
+        }}
         className="font-display text-6xl text-text md:text-8xl"
       >
         See you again.
@@ -38,40 +50,69 @@ export default function Goodbye() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 1, delay: 4 }}
+        transition={{
+          duration: 1,
+          delay: 4,
+        }}
         className="font-mono text-xs tracking-widest2 text-muted"
       >
-        2023 — 2026
+        2022 — 2025
       </motion.p>
 
       <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 1, delay: 4.6 }}
+        transition={{
+          duration: 1,
+          delay: 4.6,
+        }}
         className="font-display text-xl italic text-muted"
       >
         Until our paths cross again.
       </motion.p>
 
+      {/* LARGE GENERATION LOGO */}
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 1, delay: 5.4 }}
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-line font-mono text-[8px] tracking-widest2 text-muted-dim"
+        initial={{
+          opacity: 0,
+          scale: 0.75,
+          y: 20,
+        }}
+        whileInView={{
+          opacity: 1,
+          scale: 1,
+          y: 0,
+        }}
+        viewport={{
+          once: true,
+          amount: 0.6,
+        }}
+        transition={{
+          duration: 1.4,
+          delay: 5.4,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="flex h-44 w-44 items-center justify-center sm:h-52 sm:w-52 md:h-60 md:w-60"
       >
-        LOGO
+        <img
+          src={logo}
+          alt="Drestanta Tiyasa Logo"
+          className="h-full w-full object-contain"
+        />
       </motion.div>
 
       <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 1.2, delay: 6.2 }}
+        transition={{
+          duration: 1.2,
+          delay: 6.2,
+        }}
         className="font-mono text-[10px] tracking-widest2 text-muted-dim"
       >
-        FIN.
+        Drestanta Tiyasa
       </motion.p>
     </section>
   );

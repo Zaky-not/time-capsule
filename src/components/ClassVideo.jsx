@@ -1,104 +1,141 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Play } from 'lucide-react';
 
 const VIDEO_ID = 'MsinQEe4swQ';
 
 export default function ClassVideo() {
-  const [started, setStarted] = useState(false);
-
   return (
     <section
       id="video"
-      className="section flex min-h-screen flex-col items-center justify-center gap-14 bg-bg px-6 py-24 text-center"
+      className="relative min-h-[100dvh] overflow-hidden bg-black text-white"
     >
-      {/* TITLE */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 1 }}
-        className="flex flex-col items-center gap-3"
-      >
-        <p className="font-display text-3xl leading-snug text-text md:text-4xl">
-          DTS IN ACTION, ACTION IN DTS
-          <br />
-          XII CLASS 
-        </p>
+      {/* Background */}
+      <div className="absolute inset-0 bg-black" />
 
-        <p className="mt-4 font-display text-4xl italic text-accent md:text-5xl">
-          This was us.
-        </p>
-      </motion.div>
+      {/* Main Content */}
+      <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-5xl flex-col items-center justify-center px-6 py-16 sm:px-8 md:px-12">
 
-      {/* VIDEO */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{
-          duration: 1,
-          ease: 'easeOut',
-        }}
-        className="film-frame relative w-full max-w-4xl overflow-hidden bg-surface"
-      >
-        <div className="relative aspect-video w-full">
-          {!started ? (
-            <>
-              {/* YOUTUBE THUMBNAIL */}
-              <img
-                src={`https://img.youtube.com/vi/${VIDEO_ID}/maxresdefault.jpg`}
-                alt="Class Video"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
+        {/* =========================
+            TITLE
+        ========================== */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 1,
+            ease: 'easeOut',
+          }}
+          className="w-full text-center"
+        >
+          {/* DTS IN ACTION, ACTION IN DTS */}
+          <h2 className="whitespace-nowrap font-serif text-3xl leading-none tracking-tight text-[var(--cream)] sm:text-4xl md:text-5xl">
+            DTS IN ACTION, ACTION IN DTS
+          </h2>
 
-              {/* OVERLAY */}
-              <div className="absolute inset-0 bg-black/35" />
+          {/* XII CLASS */}
+          <p className="mt-6 whitespace-nowrap font-serif text-2xl leading-none tracking-tight text-[var(--cream)] sm:text-3xl md:text-4xl">
+            XII CLASS
+          </p>
 
-              {/* PLAY BUTTON */}
-              <button
-                type="button"
-                onClick={() => setStarted(true)}
-                aria-label="Play class video"
-                data-cursor="PLAY"
-                className="absolute inset-0 flex items-center justify-center"
-              >
-                <span className="flex h-20 w-20 items-center justify-center rounded-full border border-white/70 bg-black/20 text-white backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-black/40">
-                  <Play
-                    size={28}
-                    fill="currentColor"
-                    className="ml-1"
-                  />
-                </span>
-              </button>
-            </>
-          ) : (
-            /* YOUTUBE PLAYER */
+          {/* THIS WAS US */}
+          <p
+            className="mt-8 font-serif text-4xl italic leading-none tracking-tight sm:text-5xl md:text-6xl"
+            style={{
+              color: 'var(--gold)',
+            }}
+          >
+            This was us.
+          </p>
+        </motion.div>
+
+        {/* =========================
+            VIDEO
+        ========================== */}
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 35,
+            scale: 0.98,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            scale: 1,
+          }}
+          viewport={{
+            once: true,
+            margin: '-80px',
+          }}
+          transition={{
+            duration: 1,
+            delay: 0.2,
+            ease: 'easeOut',
+          }}
+          className="mt-14 w-full"
+        >
+          <div className="relative aspect-video w-full overflow-hidden border border-white/10 bg-black">
             <iframe
               className="absolute inset-0 h-full w-full"
-              src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}?rel=0&playsinline=1&origin=http://localhost:5174`}
-              title="Class Video"
+              src={`https://www.youtube.com/embed/${VIDEO_ID}?rel=0&playsinline=1`}
+              title="DTS In Action - XII Class"
               referrerPolicy="strict-origin-when-cross-origin"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
-          )}
-        </div>
-      </motion.div>
 
-      {/* FOOTER TEXT */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{
-          duration: 1,
-          delay: 0.3,
+            {/* Inner frame */}
+            <div className="pointer-events-none absolute inset-0 border border-white/5" />
+
+            {/* Corner marks */}
+            <span className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-white/25" />
+            <span className="pointer-events-none absolute right-3 top-3 h-3 w-3 border-r border-t border-white/25" />
+            <span className="pointer-events-none absolute bottom-3 left-3 h-3 w-3 border-b border-l border-white/25" />
+            <span className="pointer-events-none absolute bottom-3 right-3 h-3 w-3 border-b border-r border-white/25" />
+          </div>
+        </motion.div>
+
+        {/* =========================
+            CAPTION
+        ========================== */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 1,
+            delay: 0.5,
+          }}
+          className="mt-10 text-center font-mono text-[11px] leading-[1.8] tracking-[0.35em] text-white/55 sm:text-xs"
+        >
+          Press play. Remember
+          <br />
+          everything.
+        </motion.p>
+      </div>
+
+      {/* =========================
+          MUSIC BUTTON
+      ========================== */}
+      <div className="absolute bottom-8 right-6 z-30 sm:right-10">
+        <button
+          type="button"
+          className="flex items-center gap-3 rounded-full border border-white/15 px-6 py-3 font-mono text-[10px] uppercase tracking-[0.3em] text-white/60 transition hover:border-white/30 hover:text-white"
+        >
+          <span className="text-sm">◖</span>
+          MUSIC
+        </button>
+      </div>
+
+      {/* =========================
+          FILM GRAIN
+      ========================== */}
+      <div
+        className="pointer-events-none absolute inset-0 z-20 opacity-[0.025]"
+        style={{
+          backgroundImage:
+            'url("data:image/svg+xml,%3Csvg viewBox=%220 0 180 180%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%22.8%22/%3E%3C/svg%3E")',
         }}
-        className="font-mono text-xs tracking-widest2 text-muted"
-      >
-        Press play. Remember everything.
-      </motion.p>
+      />
     </section>
   );
 }

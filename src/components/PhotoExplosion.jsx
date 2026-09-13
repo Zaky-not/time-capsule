@@ -4,77 +4,83 @@ import {
   useScroll,
   useTransform,
 } from 'framer-motion';
-
-// =========================================
-// PHOTO DATA
-// =========================================
+import poto1  from '../assets/photos/poto1.jpg';
+import poto2  from '../assets/photos/poto2.jpg';
+import poto3  from '../assets/photos/poto3.jpg';
+import poto4  from '../assets/photos/poto4.jpg';
+import poto5  from '../assets/photos/poto5.jpg';
+import poto6  from '../assets/photos/poto61.jpg';
+import poto7  from '../assets/photos/poto7.jpg';
+import poto8  from '../assets/photos/poto8.jpg';
+import poto9  from '../assets/photos/poto9.jpg';
+import poto10 from '../assets/photos/poto10.jpg';
 
 const PHOTOS = [
   {
-    src: '/src/assets/photos/scatter-1.jpg',
+    src: poto1,
     from: 'left',
     top: 22,
     left: 18,
     rotate: -8,
   },
   {
-    src: '/src/assets/photos/scatter-2.jpg',
+    src: poto2,
     from: 'right',
     top: 15,
     left: 68,
     rotate: 6,
   },
   {
-    src: '/src/assets/photos/scatter-3.jpg',
+    src: poto3,
     from: 'top',
     top: 8,
     left: 42,
     rotate: -3,
   },
   {
-    src: '/src/assets/photos/scatter-4.jpg',
+    src: poto4,
     from: 'bottom',
     top: 62,
     left: 30,
     rotate: 9,
   },
   {
-    src: '/src/assets/photos/scatter-5.jpg',
+    src: poto5,
     from: 'left',
     top: 55,
     left: 72,
     rotate: -6,
   },
   {
-    src: '/src/assets/photos/scatter-6.jpg',
+    src: poto6,
     from: 'right',
     top: 40,
     left: 50,
     rotate: 4,
   },
   {
-    src: '/src/assets/photos/scatter-7.jpg',
+    src: poto7,
     from: 'bottom',
     top: 70,
     left: 58,
     rotate: -10,
   },
   {
-    src: '/src/assets/photos/scatter-8.jpg',
+    src: poto8,
     from: 'top',
     top: 30,
     left: 8,
     rotate: 7,
   },
   {
-    src: '/src/assets/photos/scatter-9.jpg',
+    src: poto9,
     from: 'right',
     top: 12,
     left: 25,
     rotate: -5,
   },
   {
-    src: '/src/assets/photos/scatter-10.jpg',
+    src: poto10,
     from: 'left',
     top: 48,
     left: 40,
@@ -458,7 +464,7 @@ export default function PhotoExplosion({
               text-accent
             "
           >
-            DTS IN ACTION...
+            DTS IN FRAME...
           </p>
 
           <p

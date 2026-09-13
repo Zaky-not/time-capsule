@@ -20,18 +20,19 @@ import kalip from '../assets/members/kalip.png';
 import kemas from '../assets/members/kemas.jpeg';
 import nabilmr from '../assets/members/nabilmr.jpeg';
 import nadip from '../assets/members/nadip.jpeg';
-import oka from '../assets/members/oka.jpg';
+import oka from '../assets/members/oka2.jpeg';
 import padil from '../assets/members/padil.jpg';
 import pardan from '../assets/members/pardan.jpg';
 import pardas from '../assets/members/pardas.jpg';
 import raja from '../assets/members/raja.jpeg';
 import syafiq from '../assets/members/syafiq.jpeg';
-import tora from '../assets/members/tora.jpg';
+import tora1 from '../assets/members/tora1.jpeg';
 import udin from '../assets/members/udin.jpeg';
 import wibi from '../assets/members/wibi.jpeg';
 import yad from '../assets/members/yad.jpg';
 import yamin from '../assets/members/yamin.png';
 import zuhdi from '../assets/members/zuhdi.jpeg';
+import bilhud from '../assets/members/bilhud.jpg';
 
 const members = [
   {
@@ -223,7 +224,7 @@ const members = [
     number: 24,
     name: 'Tora oryza pasha',
     instagram: '@oryza_pasha',
-    photo: tora,
+    photo: tora1,
     quote: 'wi wok de tok not only tok de tok.',
   },
   {
@@ -297,6 +298,14 @@ const members = [
     instagram: '@michsanfirmnsyh',
     photo: ican,
     quote: 'jadikan kegagalan sebagai bentuk dari pembelajaran.',
+  },
+  {
+    id: 'member-34',
+    number: 34,
+    name: 'Aufa Nabil Huda ',
+    instagram: '@nabiilhuda_',
+    photo: bilhud,
+    quote: 'Time is my most expensive opportunity cost.',
   },
 ];
 
