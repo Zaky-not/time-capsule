@@ -21,9 +21,9 @@ export default function ClassVideo() {
         className="flex flex-col items-center gap-3"
       >
         <p className="font-display text-3xl leading-snug text-text md:text-4xl">
-          33 people. Countless stories.
+          DTS IN ACTION, ACTION IN DTS
           <br />
-          One class.
+          XII CLASS 
         </p>
 
         <p className="mt-4 font-display text-4xl italic text-accent md:text-5xl">

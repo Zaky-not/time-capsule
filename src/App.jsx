@@ -15,11 +15,13 @@ import CustomCursor from './components/CustomCursor.jsx';
 export default function App() {
   const [entered, setEntered] = useState(false);
   const [activeId, setActiveId] = useState(STEPS[0].id);
+
   const audioRef = useRef(null);
   const sectionRefs = useRef({});
 
   const handleEnter = useCallback(() => {
     setEntered(true);
+
     // First user gesture — safe to start soft ambient sound here.
     audioRef.current?.startAmbient();
   }, []);
@@ -28,8 +30,8 @@ export default function App() {
     audioRef.current?.startMainSong();
   }, []);
 
-  // Track which section is centered in the viewport to drive the
-  // progress indicator, and fade the main song out once Goodbye appears.
+  // Track which section is centered in the viewport
+  // and fade the main song out once Goodbye appears.
   useEffect(() => {
     if (!entered) return undefined;
 
@@ -38,6 +40,7 @@ export default function App() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setActiveId(entry.target.id);
+
             if (entry.target.id === 'goodbye') {
               audioRef.current?.fadeOutMainSong(4000);
             }
@@ -49,6 +52,7 @@ export default function App() {
 
     STEPS.forEach((step) => {
       const el = document.getElementById(step.id);
+
       if (el) {
         sectionRefs.current[step.id] = el;
         observer.observe(el);
@@ -59,30 +63,46 @@ export default function App() {
   }, [entered]);
 
   const handleNavigate = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(id)?.scrollIntoView({
+      behavior: 'smooth',
+    });
   };
 
   return (
     <div className="relative bg-bg">
       <div className="grain-overlay" aria-hidden="true" />
       <div className="vignette-overlay" aria-hidden="true" />
+
       <CustomCursor />
+
       <AudioController ref={audioRef} />
 
       {!entered && <Intro onEnter={handleEnter} />}
 
       {entered && (
         <>
-          <ProgressIndicator activeId={activeId} onNavigate={handleNavigate} />
+          <ProgressIndicator
+            activeId={activeId}
+            onNavigate={handleNavigate}
+          />
+
           <main>
             <Identity />
-            <PhotoExplosion />
+
+            {/* Photo Explosion + Shutter Sound */}
+            <PhotoExplosion audioControllerRef={audioRef} />
+
             <Gallery />
+
             <Members />
+
             <ClassVideo />
+
             <MemoryWall onEnterWall={handleWallEnter} />
+
             <Goodbye />
           </main>
+
           <DeveloperCredit />
         </>
       )}
