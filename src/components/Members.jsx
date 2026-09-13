@@ -23,7 +23,7 @@ export default function Members() {
           Meet the DTS People.
         </motion.h2>
         <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.6 }} transition={{ duration: 0.9, delay: 0.2 }} className="mt-4 font-mono text-xs tracking-widest2 text-muted">
-          Apapun Apa Yang Dimpikan, Semoga Tersampaikan. 
+          Apapun Apa Yang Di impikan, Semoga Tersampaikan. 
         </motion.p>
 
         <motion.button type="button" data-cursor="SHUFFLE" onClick={pickRandom} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.6 }} transition={{ duration: 0.9, delay: 0.4 }} className="mt-10 flex items-center gap-2 border border-line px-6 py-3 font-mono text-[11px] tracking-widest2 text-muted transition-colors hover:border-accent hover:text-accent">
