@@ -33,6 +33,7 @@ import yad from '../assets/members/yad.jpg';
 import yamin from '../assets/members/yamin.png';
 import zuhdi from '../assets/members/zuhdi.jpeg';
 import bilhud from '../assets/members/bilhud.jpg';
+import farhan from '../assets/members/farhan.jpg';
 
 const members = [
   {
@@ -183,7 +184,7 @@ const members = [
     id: 'member-19',
     number: 19,
     name: 'Wahyu Kumala Putra',
-    instagram: '@uwhy_kaa1',
+    instagram: '@why_kaa1',
     photo: oka,
     quote: 'Jangan merasa dirimu tidak berguna. Bahkan debu saja diciptakan untuk tayammum.',
   },
@@ -239,7 +240,7 @@ const members = [
     id: 'member-26',
     number: 26,
     name: 'muhammad wibisono',
-    instagram: '@ci_muchu',
+    instagram: '@mw_bii1',
     photo: wibi,
     quote: 'Hidup tidak selalu berjalan sesuai rencana, tetapi kamu selalu bisa belajar menyesuaikan langkah.',
   },
@@ -255,7 +256,7 @@ const members = [
     id: 'member-28',
     number: 28,
     name: 'M.Ashhabul Yamin',
-    instagram: '@ashb_ul_yamin',
+    instagram: '@ashhb_ul_yamin',
     photo: yamin,
     quote: 'baik buruk nya mohon maaf, Jika ada baiknya itu semua dari Allah, jika ada buruknya itu semua dari setan, dan saya hanya korban.',
   },
@@ -307,6 +308,15 @@ const members = [
     photo: bilhud,
     quote: 'Time is my most expensive opportunity cost.',
   },
+  {
+    id: 'member-35',
+    number: 35,
+    name: 'M FARHAN RAMADHAN ',
+    instagram: '@mfrhn.rmdhn_',
+    photo: farhan,
+    quote: 'Bloom where you are planted..',
+  },
+  
 ];
 
 export default members;

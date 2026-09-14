@@ -4,15 +4,16 @@ import {
   useScroll,
   useTransform,
 } from 'framer-motion';
-import poto1  from '../assets/photos/poto1.jpg';
-import poto2  from '../assets/photos/poto2.jpg';
-import poto3  from '../assets/photos/poto3.jpg';
-import poto4  from '../assets/photos/poto4.jpg';
-import poto5  from '../assets/photos/poto5.jpg';
-import poto6  from '../assets/photos/poto61.jpg';
-import poto7  from '../assets/photos/poto7.jpg';
-import poto8  from '../assets/photos/poto8.jpg';
-import poto9  from '../assets/photos/poto9.jpg';
+
+import poto1 from '../assets/photos/poto1.jpg';
+import poto2 from '../assets/photos/poto2.jpg';
+import poto3 from '../assets/photos/poto3.jpg';
+import poto4 from '../assets/photos/poto4.jpg';
+import poto5 from '../assets/photos/poto5.jpg';
+import poto6 from '../assets/photos/poto61.jpg';
+import poto7 from '../assets/photos/poto7.jpg';
+import poto8 from '../assets/photos/poto8.jpg';
+import poto9 from '../assets/photos/poto9.jpg';
 import poto10 from '../assets/photos/poto10.jpg';
 
 const PHOTOS = [
@@ -93,43 +94,30 @@ const FROM_OFFSET = {
     x: -600,
     y: 0,
   },
-
   right: {
     x: 600,
     y: 0,
   },
-
   top: {
     x: 0,
     y: -500,
   },
-
   bottom: {
     x: 0,
     y: 500,
   },
 };
 
-// =========================================
-// PHOTO
-// =========================================
-
-function Photo({
+function ExplosionPhoto({
   photo,
-  scrollYProgress,
   index,
+  scrollYProgress,
 }) {
   const enterStart =
-    0.02 + index * 0.02;
+    0.02 + index * 0.018;
 
   const enterEnd =
-    enterStart + 0.14;
-
-  const snapStart = 0.46;
-  const snapEnd = 0.55;
-
-  const fadeStart = 0.82;
-  const fadeEnd = 0.95;
+    enterStart + 0.13;
 
   const {
     x: fromX,
@@ -138,50 +126,20 @@ function Photo({
 
   const x = useTransform(
     scrollYProgress,
-    [
-      enterStart,
-      enterEnd,
-      snapStart,
-      snapEnd,
-    ],
-    [
-      fromX,
-      0,
-      0,
-      0,
-    ]
+    [enterStart, enterEnd],
+    [fromX, 0]
   );
 
   const y = useTransform(
     scrollYProgress,
-    [
-      enterStart,
-      enterEnd,
-      snapStart,
-      snapEnd,
-    ],
-    [
-      fromY,
-      0,
-      0,
-      0,
-    ]
+    [enterStart, enterEnd],
+    [fromY, 0]
   );
 
   const scale = useTransform(
     scrollYProgress,
-    [
-      enterStart,
-      enterEnd,
-      snapStart,
-      snapEnd,
-    ],
-    [
-      0.6,
-      1,
-      1,
-      0.42,
-    ]
+    [enterStart, enterEnd],
+    [0.65, 1]
   );
 
   const rotate = useTransform(
@@ -189,7 +147,7 @@ function Photo({
     [
       enterStart,
       enterEnd,
-      snapEnd,
+      0.55,
     ],
     [
       photo.rotate * 2,
@@ -202,9 +160,9 @@ function Photo({
     scrollYProgress,
     [
       enterStart,
-      enterStart + 0.03,
-      fadeStart,
-      fadeEnd,
+      enterStart + 0.035,
+      0.88,
+      0.96,
     ],
     [
       0,
@@ -216,7 +174,7 @@ function Photo({
 
   const top = useTransform(
     scrollYProgress,
-    [snapStart, snapEnd],
+    [0.46, 0.55],
     [
       `${photo.top}%`,
       '50%',
@@ -225,19 +183,10 @@ function Photo({
 
   const left = useTransform(
     scrollYProgress,
-    [snapStart, snapEnd],
+    [0.46, 0.55],
     [
       `${photo.left}%`,
       '50%',
-    ]
-  );
-
-  const finalScale = useTransform(
-    scrollYProgress,
-    [fadeStart, fadeEnd],
-    [
-      0.42,
-      index === 0 ? 6 : 0.3,
     ]
   );
 
@@ -251,53 +200,47 @@ function Photo({
         y,
         rotate,
         opacity,
-        scale:
-          index === 0
-            ? finalScale
-            : scale,
+        scale,
         translateX: '-50%',
         translateY: '-50%',
+        willChange: 'transform, opacity',
       }}
       className="
-        h-40
-        w-32
-        shrink-0
+        h-32
+        w-24
         overflow-hidden
         border
         border-line
         bg-surface
-        shadow-2xl
+        shadow-xl
+        sm:h-40
+        sm:w-32
         md:h-56
         md:w-44
+        md:shadow-2xl
       "
     >
       <img
         src={photo.src}
         alt=""
+        loading={index < 4 ? 'eager' : 'lazy'}
+        decoding="async"
+        fetchPriority={index < 2 ? 'high' : 'auto'}
         className="
           h-full
           w-full
           object-cover
         "
-        loading="lazy"
-        decoding="async"
       />
     </motion.div>
   );
 }
 
-// =========================================
-// MAIN COMPONENT
-// =========================================
-
 export default function PhotoExplosion({
   audioControllerRef,
 }) {
   const containerRef = useRef(null);
-
-  // Supaya shutter cuma dimainkan sekali
-  const shutterPlayedRef =
-    useRef(false);
+  const shutterPlayedRef = useRef(false);
 
   const {
     scrollYProgress,
@@ -309,23 +252,16 @@ export default function PhotoExplosion({
     ],
   });
 
-  // =========================================
-  // SHUTTER TRIGGER
-  // =========================================
-
   useEffect(() => {
     const unsubscribe =
       scrollYProgress.on(
         'change',
         (progress) => {
-          // Begitu Photo Explosion mulai,
-          // mainkan shutter satu kali.
           if (
             progress >= 0.01 &&
             !shutterPlayedRef.current
           ) {
-            shutterPlayedRef.current =
-              true;
+            shutterPlayedRef.current = true;
 
             audioControllerRef?.current?.playShutter();
           }
@@ -337,10 +273,6 @@ export default function PhotoExplosion({
     scrollYProgress,
     audioControllerRef,
   ]);
-
-  // =========================================
-  // TEXT ANIMATION
-  // =========================================
 
   const collageTextOpacity =
     useTransform(
@@ -388,12 +320,8 @@ export default function PhotoExplosion({
     []
   );
 
-  // =========================================
-  // RENDER
-  // =========================================
-
   return (
-    <div
+    <section
       ref={containerRef}
       className="
         relative
@@ -412,7 +340,7 @@ export default function PhotoExplosion({
       >
         {photos.map(
           (photo, index) => (
-            <Photo
+            <ExplosionPhoto
               key={photo.src}
               photo={photo}
               index={index}
@@ -423,7 +351,6 @@ export default function PhotoExplosion({
           )
         )}
 
-        {/* DIM */}
         <motion.div
           style={{
             opacity: dimOverlay,
@@ -436,7 +363,6 @@ export default function PhotoExplosion({
           "
         />
 
-        {/* COLLAGE TEXT */}
         <motion.div
           style={{
             opacity:
@@ -479,7 +405,6 @@ export default function PhotoExplosion({
           </p>
         </motion.div>
 
-        {/* STORY TEXT */}
         <motion.div
           style={{
             opacity:
@@ -512,6 +437,6 @@ export default function PhotoExplosion({
           </p>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 }

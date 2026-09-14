@@ -113,18 +113,6 @@ export default function ClassVideo() {
         </motion.p>
       </div>
 
-      {/* =========================
-          MUSIC BUTTON
-      ========================== */}
-      <div className="absolute bottom-8 right-6 z-30 sm:right-10">
-        <button
-          type="button"
-          className="flex items-center gap-3 rounded-full border border-white/15 px-6 py-3 font-mono text-[10px] uppercase tracking-[0.3em] text-white/60 transition hover:border-white/30 hover:text-white"
-        >
-          <span className="text-sm">◖</span>
-          MUSIC
-        </button>
-      </div>
 
       {/* =========================
           FILM GRAIN

@@ -11,27 +11,18 @@ import ambient from '../assets/audio/ambient.mp3';
 import mainSong from '../assets/audio/main.mp3';
 import shutter from '../assets/audio/shutter.mp3';
 
-/**
- * Audio Controller
- *
- * ambient.mp3  → ambience untuk bagian awal
- * shutter.mp3  → efek kamera / photo explosion
- * main.mp3     → lagu utama, mulai saat Memory Wall
- */
-
 const AudioController = forwardRef(function AudioController(_, ref) {
   const ambientRef = useRef(null);
   const songRef = useRef(null);
+  const shutterRef = useRef(null);
 
   const [muted, setMuted] = useState(false);
   const [songStarted, setSongStarted] = useState(false);
 
   useImperativeHandle(ref, () => ({
-    /**
-     * Start ambient sound
-     * Dipanggil setelah user melakukan gesture
-     * seperti ENTER MEMORY.
-     */
+    // =========================================
+    // AMBIENT
+    // =========================================
     startAmbient() {
       const el = ambientRef.current;
 
@@ -42,24 +33,24 @@ const AudioController = forwardRef(function AudioController(_, ref) {
       el.play().catch(() => {});
     },
 
-    /**
-     * Camera shutter sound
-     * Dipakai saat Photo Explosion / perpindahan foto.
-     */
+    // =========================================
+    // SHUTTER
+    // =========================================
     playShutter() {
-      if (muted) return;
+      const el = shutterRef.current;
 
-      const sfx = new Audio(shutter);
+      if (!el || muted) return;
 
-      sfx.volume = 0.3;
+      // Reset supaya selalu mulai dari awal
+      el.currentTime = 0;
+      el.volume = 0.3;
 
-      sfx.play().catch(() => {});
+      el.play().catch(() => {});
     },
 
-    /**
-     * Start main emotional song
-     * Dipanggil saat masuk Memory Wall.
-     */
+    // =========================================
+    // MAIN SONG
+    // =========================================
     startMainSong() {
       const el = songRef.current;
 
@@ -73,7 +64,7 @@ const AudioController = forwardRef(function AudioController(_, ref) {
 
       el.play().catch(() => {});
 
-      // Smooth fade-in sekitar 3.6 detik
+      // Fade in
       const steps = [0.1, 0.25, 0.5, 0.7];
 
       steps.forEach((volume, index) => {
@@ -84,43 +75,11 @@ const AudioController = forwardRef(function AudioController(_, ref) {
         }, (index + 1) * 900);
       });
     },
-
-    /**
-     * Fade out main song
-     * Dipanggil ketika menuju halaman akhir.
-     */
-    fadeOutMainSong(duration = 2500) {
-      const el = songRef.current;
-
-      if (!el) return;
-
-      const startVolume = el.volume;
-      const steps = 10;
-      const stepTime = duration / steps;
-
-      let step = 0;
-
-      const interval = setInterval(() => {
-        step += 1;
-
-        el.volume = Math.max(
-          0,
-          startVolume * (1 - step / steps)
-        );
-
-        if (step >= steps) {
-          clearInterval(interval);
-
-          el.pause();
-          el.currentTime = 0;
-        }
-      }, stepTime);
-    },
   }));
 
-  /**
-   * Sync mute state dengan audio element.
-   */
+  // =========================================
+  // MUTE / UNMUTE
+  // =========================================
   useEffect(() => {
     if (ambientRef.current) {
       ambientRef.current.muted = muted;
@@ -129,40 +88,67 @@ const AudioController = forwardRef(function AudioController(_, ref) {
     if (songRef.current) {
       songRef.current.muted = muted;
     }
+
+    if (shutterRef.current) {
+      shutterRef.current.muted = muted;
+    }
   }, [muted]);
 
   return (
     <>
-      {/* Ambient */}
+      {/* =====================================
+          AMBIENT
+      ===================================== */}
       <audio
         ref={ambientRef}
         src={ambient}
         loop
-        preload="none"
+        preload="auto"
       />
 
-      {/* Main Song */}
+      {/* =====================================
+          SHUTTER
+      ===================================== */}
+      <audio
+        ref={shutterRef}
+        src={shutter}
+        preload="auto"
+      />
+
+      {/* =====================================
+          MAIN SONG
+          TIDAK LOOP
+      ===================================== */}
       <audio
         ref={songRef}
         src={mainSong}
-        loop
-        preload="none"
+        preload="auto"
       />
 
-      {/* Music Control */}
+      {/* =====================================
+          MUSIC CONTROL
+      ===================================== */}
       <button
         type="button"
         onClick={() => setMuted((current) => !current)}
         aria-pressed={muted}
         aria-label={muted ? 'Unmute music' : 'Mute music'}
         className="
-          fixed bottom-6 right-6 z-50
-          flex items-center gap-2
+          fixed
+          bottom-6
+          right-6
+          z-50
+          flex
+          items-center
+          gap-2
           rounded-full
-          border border-line
+          border
+          border-line
           bg-bg-soft/70
-          px-4 py-2
-          font-mono text-[10px]
+          px-4
+          py-2
+          font-mono
+          text-[10px]
           tracking-widest2
           text-muted
           backdrop-blur-sm
