@@ -28,7 +28,7 @@ export default function ClassVideo() {
           className="w-full text-center"
         >
           {/* DTS IN ACTION, ACTION IN DTS */}
-          <h2 className="whitespace-nowrap font-serif text-3xl leading-none tracking-tight text-[var(--cream)] sm:text-4xl md:text-5xl">
+          <h2 className="whitespace-nowrap font-serif text-[1.35rem] leading-none tracking-tight text-[var(--cream)] sm:text-4xl md:text-5xl">
             DTS IN ACTION, ACTION IN DTS
           </h2>
 
